@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  climate: 
+    image: dattarahegaonkar09/climate-app
+    container_name: climate-app
+    ports:
+      - "5000:5173"
+    networks:
+      - climate-cast
+
+networks:
+  climate-cast:
+    external: true

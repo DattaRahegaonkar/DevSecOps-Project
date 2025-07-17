@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: climate-app-deployment
+  namespace: climate-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: climate
+  template:
+    metadata:
+      labels:
+        app: climate
+    spec:
+      containers:
+      - name: climate-app-container
+        image: dattarahegaonkar09/climate-app
+        ports:
+        - containerPort: 5173
