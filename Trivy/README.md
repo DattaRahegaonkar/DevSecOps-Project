@@ -29,6 +29,18 @@ sudo apt-get install trivy -y
 trivy --version
 ```
 
+### File System Scan
+
+```
+trivy fs . --format table -o trivy-fs-report.html
+```
+
+### Docker Image Scan
+
+```
+trivy image climate-app --format table -o trivy-image-report.html
+```
+
 
 ### Syntax
 
