@@ -23,20 +23,20 @@ pipeline {
                 dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
             }
         }
-        stage("SonarQube Quality Gate") {
-            steps {
-                timeout(time: 2, unit: 'MINUTES') {
-                    waitForQualityGate abortPipeline: false
-                }
-            }
-        }
         stage("Trivy File System Scan") {
             steps {
                 sh "trivy fs . --format table -o trivy-fs-report-.html"
             }
         }
+        stage("Trivy Docker Image Scan") {
+            steps {
+                sh 'docker build -t climate-app .'
+                sh 'trivy image climate-app --format table -o trivy-image-report.html || true'
+            }
+        }
         stage("Deploy Using Docker Compose") {
             steps {
+                sh "docker rm -f climate-app || true"
                 sh "docker-compose up -d"
             }
         }

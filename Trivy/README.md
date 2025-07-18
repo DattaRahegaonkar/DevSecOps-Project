@@ -8,7 +8,7 @@ File systems
 
 Trivy is widely used in DevSecOps pipelines to catch known CVEs before deployment.
 
-1. Install Trivy
+### Install Trivy
 
 ```
 ### Install dependencies
