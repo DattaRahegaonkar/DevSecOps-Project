@@ -28,9 +28,13 @@ pipeline {
                 sh "trivy fs . --format table -o trivy-fs-report-.html"
             }
         }
-        stage("Trivy Docker Image Scan") {
+        stage("Building the Docker Image") {
             steps {
                 sh 'docker build -t climate-app .'
+            }
+        }
+        stage("Trivy Docker Image Scan") {
+            steps {
                 sh 'trivy image climate-app --format table -o trivy-image-report.html || true'
             }
         }
